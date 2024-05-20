@@ -1,0 +1,47 @@
+@host = http://localhost:3005
+@service-prefix = payment-service
+# @host = http://localhost:31100
+
+
+### 
+
+
+  # orderId: z.string(),
+  # combos: z.array(
+  #   z.object({
+  #     id: z.string(),
+  #     name: z.string(),
+  #     description: z.string(),
+  #     price: z.number(),
+  #     quantity: z.number().int(),
+  #   })
+  # ),
+
+# @name create-payment
+POST {{host}}/{{service-prefix}}/create
+content-type: application/json
+
+{
+  "orderId": "8632bb5e-8051-4538-a0c0-e6f7eeae4e61",
+  "combos": [
+    {
+      "id": "2d979230-54ab-4c1d-baa2-7527277566aa",
+      "name": "Combo 1716145841645",
+      "description": "Combo 1716145841645",
+      "price": 0.12,
+      "quantity": 2
+    }
+  ]
+}
+
+### 
+
+# @name webhook
+POST {{host}}/{{service-prefix}}/mercado-pago/webhook
+content-type: application/json
+
+{
+  "resource": "https://api.mercadolibre.com/merchant_orders/18851567123",
+  "topic": "merchant_order"
+}
+
