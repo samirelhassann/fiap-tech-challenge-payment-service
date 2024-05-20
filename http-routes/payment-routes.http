@@ -18,11 +18,11 @@
   # ),
 
 # @name create-payment
-POST {{host}}/{{service-prefix}}/create
+POST http://51.8.23.83/payment-service/create
 content-type: application/json
 
 {
-  "orderId": "8632bb5e-8051-4538-a0c0-e6f7eeae4e61",
+  "orderId": "3e104d3a-4dac-4a71-b0e8-82548eeb21af",
   "combos": [
     {
       "id": "2d979230-54ab-4c1d-baa2-7527277566aa",
