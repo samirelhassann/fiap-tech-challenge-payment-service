@@ -11,6 +11,10 @@ export class OrderService implements IOrderService {
       .get<GetOrderByIdResponse>(endpoint)
       .then((res) => res.data)
       .catch((error) => {
+        console.error(
+          `Error calling URL: ${error.config?.url} with parameters: ${id}`,
+          error
+        );
         throw new Error(error.response.data.message);
       });
   }
