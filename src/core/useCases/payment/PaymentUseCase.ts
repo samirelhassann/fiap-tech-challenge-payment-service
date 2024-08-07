@@ -45,7 +45,7 @@ export class PaymentUseCase implements IPaymentUseCase {
     this.updatePaymentUseCase = new UpdatePaymentUseCase(
       this.paymentRepository,
       this.orderService,
-      this.statusService
+      this.messageService
     );
 
     this.orderWebHookUseCase = new OrderWebHookUseCase(

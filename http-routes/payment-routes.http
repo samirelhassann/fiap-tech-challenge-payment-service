@@ -3,36 +3,9 @@
 # @host = http://localhost:31100
 
 
-### 
+# @name update-payment
+PUT {{host}}/payment-service/70500c1c-35f8-4620-ba53-fbbfc6e82acb/paid
 
-
-  # orderId: z.string(),
-  # combos: z.array(
-  #   z.object({
-  #     id: z.string(),
-  #     name: z.string(),
-  #     description: z.string(),
-  #     price: z.number(),
-  #     quantity: z.number().int(),
-  #   })
-  # ),
-
-# @name create-payment
-POST {{host}}/payment-service/create
-content-type: application/json
-
-{
-  "orderId": "3e104d3a-4dac-4a71-b0e8-82548eeb21af",
-  "combos": [
-    {
-      "id": "2d979230-54ab-4c1d-baa2-7527277566aa",
-      "name": "Combo 1716145841645",
-      "description": "Combo 1716145841645",
-      "price": 0.12,
-      "quantity": 2
-    }
-  ]
-}
 
 ### 
 
