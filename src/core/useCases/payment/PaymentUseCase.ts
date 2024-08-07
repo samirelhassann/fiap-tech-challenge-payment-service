@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
 
+import { IMessageQueueService } from "@/core/interfaces/messaging/IMessageQueueService";
 import { IPaymentRepository } from "@/core/interfaces/repositories/IPaymentRepository";
 import { IOrderService } from "@/core/interfaces/services/IOrderService";
 import { IPaymentService } from "@/core/interfaces/services/IPaymentService";
@@ -30,24 +31,26 @@ export class PaymentUseCase implements IPaymentUseCase {
   constructor(
     private paymentRepository: IPaymentRepository,
     private paymentService: IPaymentService,
-    private orderSevice: IOrderService,
-    private statusService: IStatusService
+    private orderService: IOrderService,
+    private statusService: IStatusService,
+    private messageService: IMessageQueueService
   ) {
     this.createPaymentUseCase = new CreatePaymentUseCase(
       this.paymentRepository,
-      this.orderSevice,
-      this.paymentService
+      this.orderService,
+      this.paymentService,
+      this.messageService
     );
 
     this.updatePaymentUseCase = new UpdatePaymentUseCase(
       this.paymentRepository,
-      this.orderSevice,
+      this.orderService,
       this.statusService
     );
 
     this.orderWebHookUseCase = new OrderWebHookUseCase(
       this.paymentRepository,
-      this.orderSevice,
+      this.orderService,
       this.paymentService
     );
   }

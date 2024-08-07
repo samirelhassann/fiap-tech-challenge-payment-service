@@ -2,6 +2,7 @@ import { DomainEvents } from "@/core/domain/base/events/DomainEvents";
 import { OrderPayment } from "@/core/domain/entities/OrderPayment";
 import { IPaymentRepository } from "@/core/interfaces/repositories/IPaymentRepository";
 import { prisma } from "@/drivers/db/prisma/config/prisma";
+import { PrismaClient } from "@prisma/client";
 
 import { PrismaOrderPaymentToDomainConverter } from "./converters/PrismaOrderPaymentToDomainConverter";
 
@@ -20,8 +21,9 @@ export class PrismaPaymentRepository implements IPaymentRepository {
     return PrismaOrderPaymentToDomainConverter.convert(data);
   }
 
-  async create(order: OrderPayment): Promise<OrderPayment> {
-    const data = await prisma.orderPayment.create({
+  async create(order: OrderPayment, tx?: PrismaClient): Promise<OrderPayment> {
+    const client = tx || prisma;
+    const data = await client.orderPayment.create({
       data: {
         order_id: order.orderId.toString(),
         total_amount: order.totalAmount,
@@ -35,8 +37,9 @@ export class PrismaPaymentRepository implements IPaymentRepository {
     return PrismaOrderPaymentToDomainConverter.convert(data);
   }
 
-  async update(order: OrderPayment): Promise<OrderPayment> {
-    const data = await prisma.orderPayment.update({
+  async update(order: OrderPayment, tx?: PrismaClient): Promise<OrderPayment> {
+    const client = tx || prisma;
+    const data = await client.orderPayment.update({
       where: {
         id: order.id.toString(),
       },

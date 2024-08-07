@@ -3,6 +3,7 @@
 import { UpdatedOrderStatusSubscriber } from "@/core/subscribers/UpdatedOrderStatusSubscriber";
 import { PaymentUseCase } from "@/core/useCases/payment/PaymentUseCase";
 
+import { RabbitMQService } from "../messaging/rabbitmq/RabbitMQService";
 import { PrismaPaymentRepository } from "../repositories/PrismaPaymentRepository";
 import { MercadoPagoService } from "../services/mercadoPago/MercadoPagoService";
 import { OrderService } from "../services/orderService";
@@ -15,7 +16,9 @@ export function orderSubscribers() {
     paymentRepository,
     new MercadoPagoService(),
     new OrderService(),
-    new StatusService()
+    new StatusService(),
+
+    RabbitMQService.getInstance()
   );
 
   new UpdatedOrderStatusSubscriber(paymentUseCase);

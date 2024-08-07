@@ -8,7 +8,7 @@ export interface GetOrderByIdResponse {
   combos: Combo[];
 }
 
-interface Combo {
+export interface Combo {
   id: string;
   name: string;
   description: string;

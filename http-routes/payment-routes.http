@@ -18,7 +18,7 @@
   # ),
 
 # @name create-payment
-POST http://51.8.23.83/payment-service/create
+POST {{host}}/payment-service/create
 content-type: application/json
 
 {
